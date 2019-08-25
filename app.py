@@ -28,8 +28,10 @@ for bucket in list_buckets_resp['Buckets']:
 
 print('Uploading some data to {} with key: {}'.format(bucket_name, object_key))
 
-
 EXPIRES = datetime.datetime.now() + datetime.timedelta(days=9999)
+
+print("Expire Date : " + EXPIRES.strftime("%Y.%m.%d - %H:%M:%S"))
+
 s3client.put_object(Bucket=bucket_name, Key=object_key, Body=b'KITRI BoB 8th!', ACL='public-read', Expires=EXPIRES)
 url = s3client.generate_presigned_url('get_object', {'Bucket': bucket_name, 'Key': object_key})
 
